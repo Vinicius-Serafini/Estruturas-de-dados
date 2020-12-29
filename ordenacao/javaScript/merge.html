@@ -1,0 +1,46 @@
+<script>
+
+function mergeSort(dados, inicio, fim) {
+    if (inicio < fim) {
+        var meio = Math.trunc((inicio + fim) / 2);
+        
+        mergeSort(dados, inicio, meio);
+        mergeSort(dados, meio + 1, fim);
+
+        mescla(dados, inicio, meio, fim);
+    }
+}
+
+function mescla(dados, inicio, meio, fim) {
+    var primeiraMetade = dados.slice(inicio, meio + 1);
+    var segundaMetade = dados.slice(meio + 1, fim + 1);
+
+    var i = inicio;
+    var posP = 0;
+    var posS = 0;
+
+    while ((posP < primeiraMetade.length) && (posS < segundaMetade.length)) {
+        if (primeiraMetade[posP] < segundaMetade[posS]) {
+            dados[i] = primeiraMetade[posP];
+            posP = posP + 1;
+        } else {
+            dados[i] = segundaMetade[posS];
+            posS = posS + 1;
+        }
+        i = i + 1;
+    }
+
+    while (posP < primeiraMetade.length) {
+        dados[i] = primeiraMetade[posP];
+        posP = posP + 1;
+        i = i + 1;
+    }
+
+    while (posS < segundaMetade.length) {
+        dados[i] = segundaMetade[posS];
+        posS = posS + 1;
+        i = i + 1;
+    }
+}
+
+</script>

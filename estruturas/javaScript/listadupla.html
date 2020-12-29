@@ -1,0 +1,146 @@
+<script>
+
+class Node {
+
+    constructor(value) {
+
+        this.value = value;
+        this.prev = null;
+        this.next = null;
+    }
+
+}
+
+class DoubleLinkedList {
+
+    constructor() {
+
+        this.head = null;
+        this.tail = null;
+        this.size = 0;    
+    }
+
+    insert(value) {
+
+        var n = new Node(value);
+
+        if (this.head === null) {
+            this.head = n;
+            this.tail = n;
+        } else {
+            n.prev = this.tail;
+            if (this.tail != null) {
+                this.tail.next = n;
+            }
+            this.tail = n;
+        }
+        this.size++;
+    }
+
+    insertOn(value, position) {
+
+        var n = new Node(value);
+
+        if ((this.head === null) || position === this.size) {
+            this.insert(value);
+        } else {
+            if (position === 0) {
+                n.next = this.head;
+                this.head.prev = n;
+                this.head = n;
+            } else {
+                var count = 1;
+                var current = this.head.next;
+                
+                while (count < position) {
+                    current = current.next;
+                    count++;
+                }
+
+                n.next = current;
+                n.prev = current.prev;
+                current.prev.next = n;
+                current.prev = n;
+            }
+            this.size++;
+        }
+    }
+
+    remove(value) {
+
+        var current = this.head;
+
+        while (current != null) {
+            if (current.value === value) {
+
+                if ((current != this.head) && (current != this.tail)) {
+                    current.next.prev = current.prev;
+                    current.prev.next = current.next;
+                }
+
+                if (current === this.head) {
+                    if (current.next !== null) {
+                        current.next.prev = null; 
+                    }
+                    this.head = current.next;
+                }
+
+                if (current == this.tail) {
+                    if (current.prev !== null) {
+                        current.prev.next = null; 
+                    }
+                    this.tail = current.prev;
+                }
+
+                this.size--;
+                return true;
+
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
+    search(value) {
+
+        var current = this.head;
+
+        while (current != null && current.value != value) {
+            current = current.next;
+        }
+        return current;
+    }
+
+    print() {
+
+        var saida = "";
+        var current = this.head;
+
+        while (current != null) {
+            if (saida != "") {
+                saida = saida + ",";
+            }
+            saida = saida + current.value;
+            current = current.next;
+        }
+        console.log(`[${saida}]`);
+    }
+
+    printBackwards() {
+
+        var saida = "";
+        var current = this.tail;
+
+        while (current != null) {
+            if (saida != "") {
+                saida = saida + ",";
+            }
+            saida = saida + current.value;
+            current = current.prev;
+        }
+        console.log(`[${saida}]`);
+    }
+
+}
+
+</script>

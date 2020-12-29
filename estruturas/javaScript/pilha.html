@@ -1,0 +1,35 @@
+<script>
+
+class Stack {
+
+    constructor(size) {
+
+        this.data = new Array(size);
+        this.size = size; 
+        this.tos = -1;
+    }
+
+    push(value) {
+
+        this.tos = this.tos + 1;
+        this.data[this.tos] = value;
+    }
+
+    pop() {
+        if (this.tos >= 0) {
+
+            var copy = this.data[this.tos];
+            this.data[this.tos] = null;
+            this.tos = this.tos - 1;
+            return copy;
+        }
+    }
+
+    print() {
+
+        console.log(this.data);
+    }
+
+}
+
+</script>

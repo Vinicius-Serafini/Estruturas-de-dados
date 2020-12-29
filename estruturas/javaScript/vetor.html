@@ -1,0 +1,79 @@
+<script>
+
+class Vector {
+    constructor (size) {
+
+        this.data = new Array (size);
+        this.last = -1;
+    }
+
+    print() {
+
+        console.log(this.data);
+    }
+
+    add(value) {
+
+        this.grow();
+        this.last++;
+        this.data[this.last] = value;
+    }
+
+    insert(i, value){
+
+        this.grow();
+        for (var j = this.last ; j >= i ;j--){
+            this.data[j + 1] = this.data[j];
+        }
+        this.data[i] = value;
+        this.last++;
+    }
+
+    grow(){
+
+        if (this.data.length === this.last+1) {
+            var size = this.data.length*1.5;
+            var copy = new Array(size);
+
+            for(var i = 0; i < this.data.length; i++){
+                copy[i] = this.data[i];
+            }
+
+            this.data = copy;
+        }
+    }
+
+    search(value){
+
+        for(var i = 0; i < this.data.length ; i++){
+            if(value === this.data[i]){
+                return i;
+            }
+            
+        }
+        return -1;
+    }
+
+    get(i){
+
+        return this.data[i];
+    }
+
+    remove(i){ 
+
+        if(i >= 0 && i <= this.last) {
+            for(var j = i; j <= this.last; j++ ){
+                this.data[j] = this.data[j+1];
+            }
+            this.last--;
+        }
+    }
+
+    delete(value){
+
+        var i = this.search(value);    
+        this.remove(i);
+    }
+}
+
+</script>

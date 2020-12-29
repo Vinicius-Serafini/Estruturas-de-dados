@@ -1,0 +1,121 @@
+<script>
+
+class Node {
+
+    constructor(value) {
+
+        this.value = value;
+        this.next = null;
+    }
+
+}
+
+class LinkedList {
+
+    constructor() {
+
+        this.head = null;
+    }
+
+    insert(value) {
+
+        var n = new Node(value);
+        n.next = this.head;
+        this.head = n;
+    }
+
+    remove(value) {
+
+        var prev = null;
+        var current = this.head;
+
+        while (current != null) {
+            if (current.value === value) {
+                if (current === this.head) {
+                    this.head = current.next;
+                } else {
+                    prev.next = current.next;
+                }
+                return true;
+            }
+            prev = current;
+            current = current.next;
+        }
+        return false;
+    }
+
+    search(value) {
+
+        var current = this.head;
+
+        while (current != null && current.value != value) {
+            current = current.next;
+        }
+        return current;
+    }
+
+    print() {
+
+        var saida = "";
+        var current = this.head;
+
+        while (current != null) {
+            if (saida != "") {
+                saida = saida + ",";
+            }
+            saida = saida + current.value;
+            current = current.next;
+        }
+        console.log(`[${saida}]`);
+    }
+
+}
+
+class HashTable{ 
+    constructor() {
+
+        this.lists = new Array(31);
+
+        for( var i = 0; i < this.lists.length; i++ ){
+            this.lists[i] = new LinkedList();
+        } 
+    }
+
+    hashCode(value) {
+
+        if(typeof value === "string"){
+            var hash = 0;
+            for(var i = 0; i < value.length; i ++){
+                hash += value.charCodeAt(i);
+            }   
+            hash = hash % value.length
+            return hash % this.lists.length;
+        }
+
+        return value % this.lists.length;
+    }
+
+    insert(value){
+
+        var pos = this.hashCode(value);
+        var l = this.lists[pos];
+        l.insert(value);
+    }
+
+    search(value){
+
+        var pos = this.hashCode(value);
+        var l = this.lists[pos];
+        var node = l.search(value);
+        return node;
+    }
+
+    remove(value){
+        
+       var pos = this.hashCode(value);
+       var l = this.lists[pos];
+       return l.remove(value);
+    }
+}
+
+</script>

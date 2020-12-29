@@ -1,0 +1,19 @@
+<script>
+
+function buscaBinaria(dados, chave, posicao_inicial, posicao_final) {
+
+    var posicao_meio = (posicao_inicial + posicao_final) / 2;
+    var valor_meio = dados[posicao_meio];
+    
+    if (chave === valor_meio) {
+        return posicao_meio;
+    } else if (posicao_inicial === posicao_final) {
+        return -1;
+    } else if (chave > valor_meio) {
+        return buscaBinaria(dados, chave, posicao_meio + 1, posicao_final);
+    } else {
+        return buscaBinaria(dados, chave, posicao_inicial, posicao_meio - 1);
+    }
+}
+
+</script>

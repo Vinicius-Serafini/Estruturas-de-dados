@@ -1,0 +1,17 @@
+<script>
+
+function insertionSort(dados) {
+    for (var i = 1; i < dados.length; i++) {
+        var copia = dados[i];
+        var j = i - 1;
+        while ((j >= 0) && (dados[j] > copia)) {
+            if (dados[j] > copia) {
+                dados[j + 1] = dados[j];
+            }
+            j = j - 1;
+        }
+        dados[j + 1] = copia;
+    }
+}
+
+</script>

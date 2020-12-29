@@ -1,0 +1,32 @@
+<script>
+
+function particiona(dados, p, r) {
+    var pivot = dados[r];
+    var i = p - 1;
+    for (var j = p; j <= r - 1; j++) {
+        if (dados[j] <= pivot) {
+            i = i + 1;
+            troca(dados, i, j);
+        }
+    }
+    troca(dados, i + 1, r);
+    return i + 1;
+}
+
+function quickSort(dados, p, r) {
+    console.log(`Q: ${p} - ${r}`);
+    if (p < r) {
+        // Posição do pivot
+        var q = particiona(dados, p, r);
+        quickSort(dados, p, q - 1);
+        quickSort(dados, q + 1, r);    
+    }
+}
+
+function troca(dados, origem, destino) {
+    var copia = dados[origem];
+    dados[origem] = dados[destino];
+    dados[destino] = copia;
+}
+
+</script>

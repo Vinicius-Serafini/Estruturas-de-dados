@@ -1,0 +1,82 @@
+<script>
+
+class Queue {
+
+    constructor(size) {
+        
+        this.data = new Array(size);
+        this.size = size; 
+        this.in = 0;
+        this.out = 0;
+        this.count = 0;
+    }
+
+    enqueue(value) {
+
+        if (this.count < this.size) {
+            this.count++;
+            this.data[this.in] = value;
+            this.in = (this.in + 1) % this.size;
+        }
+    }
+
+    dequeue() {
+
+        if (this.count > 0) {
+            this.count--;
+            var copy = this.data[this.out];
+            this.out = (this.out + 1) % this.size;
+            return copy;
+        }
+    }
+
+    printData() {
+
+        var saida = "";
+        var i = this.out;
+
+        while (i !== this.in) {
+            if (saida != "") {
+                saida += ",";
+            }
+            saida += this.data[i];
+            i = (i + 1) % this.size;
+        }
+        console.log(`[${saida}]`);
+    }
+
+    printStructure() {
+
+        var saida = "";
+
+        for (var i = 0; i < this.data.length; i++) {
+            if (saida != "") {
+                saida += ",";
+            }
+
+            if (i === this.out) {
+                saida += "<";
+            }
+
+            if (this.data[i]) {
+                saida += this.data[i];
+            } else {
+                saida += "null";
+            }
+
+            if (i === this.in) {
+                saida += ">";
+            }
+        }
+        console.log(`[${saida}]`);
+    }
+
+    print() {
+
+        this.printData();
+        this.printStructure();
+    }
+
+}
+
+</script>
